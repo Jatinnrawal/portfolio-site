@@ -92,3 +92,50 @@ a:hover {
 html {
   scroll-behavior: smooth;
 }
+
+form {
+  background: #1f1f1f;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #f1f1f1;
+  font-weight: bold;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  background: #0e0e0e;
+  border: 1px solid #3b82f6;
+  border-radius: 0.5rem;
+  color: #f1f1f1;
+}
+
+form input:focus,
+form textarea:focus {
+  outline: none;
+  border-color: #60a5fa;
+}
+
+.btn {
+  background: #3b82f6;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.btn:hover {
+  background: #60a5fa;
+}
+
