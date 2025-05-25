@@ -1,108 +1,140 @@
-/* ===== RESET ===== */
+/* === GOATED DARK MODE PORTFOLIO CSS === */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(to right, #f9f9f9, #eaeaea);
-  color: #333;
+  background: #121212;
+  color: #f5f5f5;
   line-height: 1.6;
-  scroll-behavior: smooth;
 }
 
-/* ===== CONTAINER ===== */
-section {
-  max-width: 900px;
-  margin: 80px auto;
-  padding: 0 20px;
-  animation: fadeIn 1s ease forwards;
-}
-
-/* ===== HEADINGS ===== */
-h1, h2 {
+/* HEADER */
+header {
+  background-color: #1f1f1f;
+  padding: 30px 0;
   text-align: center;
-  color: #222;
-  margin-bottom: 20px;
+  border-bottom: 1px solid #333;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+header h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 10px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.tagline {
+  color: #0d99ff;
+  font-size: 1.1rem;
+  letter-spacing: 0.7px;
+  font-style: italic;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+/* SECTION STYLES */
+section {
+  padding: 60px 20px;
+  text-align: center;
+  animation: fadeInUp 1s ease-in-out;
+}
+
+h2 {
+  font-size: 2.2rem;
+  margin-bottom: 25px;
+  color: #ffffff;
   position: relative;
+  display: inline-block;
 }
 
 h2::after {
   content: '';
-  width: 60px;
+  display: block;
+  width: 60%;
   height: 3px;
-  background-color: #007bff;
-  display: block;
-  margin: 10px auto 0;
-  border-radius: 10px;
-}
-
-/* ===== PROJECTS LIST ===== */
-ul {
-  list-style-type: none;
-  padding-left: 0;
-}
-
-li {
-  background: #fff;
-  margin-bottom: 20px;
-  padding: 20px 25px;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
-  transition: all 0.3s ease;
-  animation: slideUp 0.8s ease both;
-  animation-delay: 0.3s;
-}
-
-li:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-}
-
-/* ===== TEXT ELEMENTS ===== */
-strong {
-  color: #007bff;
-  font-size: 1.1rem;
-  display: block;
-  margin-bottom: 5px;
+  background: #0d99ff;
+  margin: 8px auto 0;
+  border-radius: 3px;
 }
 
 p {
-  margin-top: 10px;
+  max-width: 800px;
+  margin: 0 auto 40px;
+  font-size: 1.1rem;
+  color: #c0c0c0;
 }
 
-/* ===== ANIMATIONS ===== */
+/* SKILLS */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  background: #1e1e1e;
+  margin: 15px auto;
+  padding: 18px 28px;
+  border-radius: 16px;
+  max-width: 600px;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-size: 1.05rem;
+}
+
+ul li:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+}
+
+/* FOOTER */
+footer {
+  background: #1f1f1f;
+  color: #999;
+  padding: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* ANIMATIONS */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes fadeIn {
-  from {
+  0% {
     opacity: 0;
-    transform: translateY(20px);
   }
-  to {
+  100% {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2rem;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  .tagline {
+    font-size: 1rem;
   }
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 600px) {
   section {
-    padding: 0 15px;
+    padding: 40px 10px;
   }
-
-  li {
-    padding: 15px;
+  ul li {
+    max-width: 90%;
   }
 }
