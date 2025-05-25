@@ -1,57 +1,94 @@
+/* === GLOBAL STYLES === */
 body {
-    margin: 0;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f5f5f5;
-    color: #222;
-    padding: 2rem;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom right, #f9f9f9, #e0e0e0);
+  color: #333;
+  scroll-behavior: smooth;
+}
+
+section {
+  padding: 60px 20px;
+  max-width: 1000px;
+  margin: auto;
+  animation: fadeInUp 1s ease;
+}
+
+h1, h2 {
+  color: #111;
+  text-align: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: #0077ff;
+  margin: 10px auto 0;
+  border-radius: 5px;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+li {
+  background: #fff;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: slideIn 0.7s ease;
+}
+
+li:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+strong {
+  color: #0077ff;
+  font-size: 1.1em;
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* === ANIMATIONS === */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
   }
-  
-  #projects {
-    margin: 2rem auto;
-    padding: 2rem;
-    max-width: 800px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  #projects h2 {
-    font-size: 1.8rem;
-    color: #007bff;
-    margin-bottom: 1.5rem;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
   }
-  
-  #projects ul {
-    list-style-type: disc;
-    padding-left: 1.5rem;
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
-  
-  #projects li {
-    margin-bottom: 1.2rem;
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #333;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 600px) {
+  section {
+    padding: 40px 15px;
   }
-  
-  #projects li strong {
-    font-weight: bold;
-    color: #000;
+
+  li {
+    padding: 15px;
   }
-  
-  #projects ul ul {
-    margin-top: 0.5rem;
-    padding-left: 1.5rem;
-    list-style-type: circle;
-    font-size: 0.95rem;
-    color: #555;
-  }
-  
-  #projects a {
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  #projects a:hover {
-    text-decoration: underline;
-  }
-  
+}
