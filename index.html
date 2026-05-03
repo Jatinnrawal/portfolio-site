@@ -1,105 +1,533 @@
-<!-- Trigger rebuild -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jatin | Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Jatin Rawal — DevOps Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=DM+Mono:ital,wght@0,400;1,400&family=Fraunces:ital,wght@1,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #080808;
+  --surface: #111;
+  --border: #1e1e1e;
+  --text: #e2e0d8;
+  --muted: #666;
+  --accent: #ff5c3a;
+  --accent2: #a855f7;
+  --accent-soft: #ff5c3a18;
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; overflow-x: hidden; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 1.2rem 2.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  background: #08080890; backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-size: 1.2rem; font-weight: 800; font-family: 'Outfit', sans-serif;
+  background: linear-gradient(135deg, #ff5c3a, #ff9e6d);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a {
+  font-family: 'DM Mono', monospace; font-size: 0.78rem;
+  color: var(--muted); text-decoration: none; letter-spacing: 1px; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+
+/* HERO */
+#hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: 7rem 2.5rem 3rem; position: relative; overflow: hidden;
+}
+.hero-orb { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(90px); }
+.orb1 { width: 500px; height: 500px; background: #ff5c3a1a; top: -100px; right: -80px; }
+.orb2 { width: 350px; height: 350px; background: #a855f715; bottom: 0; left: -50px; }
+
+/* grid lines bg */
+#hero::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+  opacity: 0.4;
+}
+
+.hero-layout {
+  max-width: 1100px; margin: auto; position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  width: 100%;
+}
+.hero-left { }
+.hero-right { display: flex; flex-direction: column; gap: 1rem; }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'DM Mono', monospace; font-size: 0.72rem;
+  letter-spacing: 3px; text-transform: uppercase; color: var(--accent);
+  border: 1px solid var(--accent); padding: 0.4rem 0.9rem;
+  border-radius: 2rem; margin-bottom: 2rem;
+  animation: fadeUp 0.6s ease both;
+}
+.hero-badge::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent); animation: pulse 2s ease infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+.hero-name {
+  font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 800; font-family: 'Outfit', sans-serif;
+  line-height: 1; letter-spacing: -2px; color: var(--text);
+  animation: fadeUp 0.7s 0.1s ease both;
+}
+.hero-name .orange { color: var(--accent); }
+
+.hero-tagline {
+  font-family: 'Fraunces', serif; font-style: italic; font-weight: 300;
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  color: var(--muted); margin: 1.5rem 0 2.5rem;
+  animation: fadeUp 0.7s 0.2s ease both;
+}
+
+.hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.7s 0.3s ease both; }
+
+.btn-primary {
+  background: linear-gradient(135deg, #ff5c3a, #ff9e6d);
+  color: #0a0a0a; font-family: 'Outfit', sans-serif;
+  font-weight: 800; font-size: 0.88rem;
+  padding: 0.8rem 2rem; border: none; border-radius: 6px;
+  cursor: pointer; text-decoration: none; display: inline-block;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.btn-primary:hover { opacity: 0.85; transform: translateY(-2px); }
+
+.btn-ghost {
+  background: transparent; color: var(--text);
+  font-family: 'DM Mono', monospace; font-size: 0.82rem;
+  padding: 0.8rem 2rem; border: 1px solid var(--border);
+  border-radius: 6px; cursor: pointer; text-decoration: none;
+  display: inline-block; transition: border-color 0.2s, transform 0.15s;
+}
+.btn-ghost:hover { border-color: var(--text); transform: translateY(-2px); }
+
+/* RIGHT PANEL CARDS */
+.hero-status-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.2rem 1.4rem;
+  animation: fadeUp 0.7s 0.4s ease both;
+}
+.hero-status-card .card-label {
+  font-family: 'DM Mono', monospace; font-size: 0.65rem;
+  letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem;
+}
+.hero-status-card .card-value {
+  font-size: 1rem; font-weight: 700; color: var(--text);
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.status-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: #22c55e;
+  animation: pulse 2s ease infinite; flex-shrink: 0;
+}
+
+.hero-tech-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.2rem 1.4rem;
+  animation: fadeUp 0.7s 0.5s ease both;
+}
+.hero-tech-card .card-label {
+  font-family: 'DM Mono', monospace; font-size: 0.65rem;
+  letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 0.9rem;
+}
+.tech-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.tech-pill {
+  font-family: 'DM Mono', monospace; font-size: 0.72rem;
+  padding: 0.3rem 0.8rem; border-radius: 2rem;
+  background: #1a1a1a; border: 1px solid #2a2a2a; color: #aaa;
+  transition: border-color 0.2s, color 0.2s;
+}
+.tech-pill:hover { border-color: var(--accent); color: var(--accent); }
+.tech-pill.hot { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+
+.hero-cert-card {
+  background: linear-gradient(135deg, #ff5c3a08, #a855f708);
+  border: 1px solid #ff5c3a30;
+  border-radius: 12px; padding: 1.2rem 1.4rem;
+  display: flex; align-items: center; gap: 1rem;
+  animation: fadeUp 0.7s 0.6s ease both;
+}
+.cert-badge {
+  width: 42px; height: 42px; border-radius: 8px; flex-shrink: 0;
+  background: var(--accent-soft); border: 1px solid var(--accent);
+  display: flex; align-items: center; justify-content: center; font-size: 1.3rem;
+}
+.cert-name { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.2rem; }
+.cert-meta { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--accent); }
+
+.hero-scroll {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  font-family: 'DM Mono', monospace; font-size: 0.68rem;
+  letter-spacing: 3px; color: var(--muted); text-transform: uppercase;
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  animation: fadeUp 1s 0.8s ease both;
+}
+.scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+  animation: scrollAnim 2s ease infinite;
+}
+@keyframes scrollAnim { 0%,100%{opacity:0;transform:scaleY(0);transform-origin:top;} 50%{opacity:1;transform:scaleY(1);} }
+
+/* SECTIONS */
+.section { padding: 6rem 2.5rem; }
+.section-inner { max-width: 900px; margin: auto; }
+.section-eyebrow {
+  font-family: 'DM Mono', monospace; font-size: 0.7rem;
+  letter-spacing: 4px; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem;
+}
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; font-family: 'Outfit', sans-serif;
+  letter-spacing: -0.5px; color: var(--text); margin-bottom: 3rem;
+  position: relative; display: inline-block;
+}
+.section-title::after {
+  content: ''; position: absolute; bottom: -8px; left: 0;
+  width: 60%; height: 3px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+}
+
+/* ABOUT */
+#about { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.about-text p { color: #999; line-height: 1.9; font-size: 1.05rem; margin-bottom: 1rem; }
+.about-stats {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+  background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+}
+.stat { background: var(--surface); padding: 1.5rem; }
+.stat-num { font-size: 2.2rem; font-weight: 800; color: var(--accent); letter-spacing: -1px; }
+.stat-label { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--muted); letter-spacing: 1px; margin-top: 0.3rem; }
+
+/* SKILLS */
+.skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.skill-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 1.5rem;
+  transition: border-color 0.25s, transform 0.2s; position: relative; overflow: hidden;
+}
+.skill-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2));
+  transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease;
+}
+.skill-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+.skill-card:hover::before { transform: scaleX(1); }
+.skill-icon { font-size: 1.6rem; margin-bottom: 0.75rem; }
+.skill-name { font-weight: 700; font-size: 1rem; margin-bottom: 0.4rem; }
+.skill-desc { color: #777; font-size: 0.87rem; line-height: 1.6; }
+.skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.75rem; }
+.tag {
+  font-family: 'DM Mono', monospace; font-size: 0.65rem;
+  background: #1a1a1a; border: 1px solid #2a2a2a;
+  color: var(--muted); padding: 2px 8px; border-radius: 3px;
+}
+
+/* EDUCATION */
+.edu-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 2rem 2.5rem;
+  display: flex; align-items: flex-start; gap: 2rem;
+  transition: border-color 0.25s;
+}
+.edu-card:hover { border-color: #333; }
+.edu-icon {
+  width: 56px; height: 56px; border-radius: 12px; flex-shrink: 0;
+  background: var(--accent-soft); border: 1px solid var(--accent);
+  display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
+}
+.edu-year { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--accent); letter-spacing: 2px; margin-bottom: 0.4rem; }
+.edu-degree { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.5rem; }
+.edu-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+
+/* CONTACT */
+#contact { text-align: center; }
+.contact-inner { max-width: 620px; margin: auto; }
+.contact-big { font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 800; font-family: 'Outfit', sans-serif; letter-spacing: -1px; line-height: 1.05; margin: 1rem 0 0.5rem; }
+.contact-big .orange { color: var(--accent); }
+.contact-sub { font-family: 'Fraunces', serif; font-style: italic; color: var(--muted); font-size: 1.1rem; margin-bottom: 2rem; }
+
+.contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+.contact-chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'DM Mono', monospace; font-size: 0.75rem;
+  background: var(--surface); border: 1px solid var(--border);
+  color: var(--text); padding: 0.6rem 1.2rem; border-radius: 2rem;
+  text-decoration: none; transition: border-color 0.2s, color 0.2s;
+}
+.contact-chip:hover { border-color: var(--accent); color: var(--accent); }
+
+.contact-form { text-align: left; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+.field { display: flex; flex-direction: column; gap: 0.5rem; }
+.field label { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+.field input, .field textarea {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; padding: 0.8rem 1rem;
+  color: var(--text); font-family: 'DM Mono', monospace; font-size: 0.88rem;
+  transition: border-color 0.2s; width: 100%;
+}
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); }
+.field-full { margin-bottom: 1rem; }
+.form-submit { margin-top: 1.5rem; text-align: center; }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border); padding: 2rem 2.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-copy { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); }
+.footer-links { display: flex; gap: 1.5rem; }
+.footer-links a { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--accent); }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px);} to{opacity:1;transform:translateY(0);} }
+.reveal { opacity:0; transform:translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+@media (max-width: 700px) {
+  .hero-layout, .about-grid, .skills-grid, .form-row { grid-template-columns: 1fr; }
+  .edu-card { flex-direction: column; }
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { gap: 1rem; }
+  .nav-links a { font-size: 0.7rem; }
+}
+</style>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <h1>Jatin Rawal</h1>
-      <p>Aspiring Cloud Security Engineer | BCA Graduate</p>
+
+<nav>
+  <div class="nav-logo"></div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-orb orb1"></div>
+  <div class="hero-orb orb2"></div>
+  <div class="hero-layout">
+
+    <!-- LEFT -->
+    <div class="hero-left">
+      <div class="hero-badge">Open to opportunities</div>
+      <h1 class="hero-name">Jatin<br><span class="orange">Rawal.</span></h1>
+      <p class="hero-tagline">DevOps Engineer — automating infrastructure,<br>securing systems, shipping reliability.</p>
+      <div class="hero-ctas">
+        <a href="Jatin_Resume.pdf" download class="btn-primary">Download Resume ↓</a>
+        <a href="#contact" class="btn-ghost">Get in Touch</a>
+      </div>
     </div>
-  </header>
 
-  <main class="container">
-    <section id="about">
-      <h2>About Me</h2>
-      <p>
-        I’m an aspiring Cloud Security Engineer with a passion for securing cloud systems and building secure backend apps.
-        I’ve completed my BCA and gained hands-on experience with Android development, Firebase, PHP, and ASP.NET. 
-        I’m also learning AWS, Linux, and cybersecurity fundamentals — breaking things, fixing them, and learning along the way.
-      </p>
-    </section>
+    <!-- RIGHT -->
+    <div class="hero-right">
 
-    <section id="skills">
-      <h2>Skills</h2>
-      <ul>
-        <li>AWS (IAM, EC2, S3, Security Groups)</li>
-        <li>Cybersecurity Basics</li>
-        <li>Linux & Networking</li>
-        <li>Kotlin / Dart</li>
-        <li>Android Studio</li>
-        <li>Firebase Integration</li>
-        <li>XML UI Design</li>
-        <li>PHP / ASP.NET</li>
-        <li>Git & GitHub</li>
-      </ul>
-    </section>
+      <div class="hero-status-card">
+        <div class="card-label">Current Status</div>
+        <div class="card-value">
+          <span class="status-dot"></span>
+          Available for DevOps roles &amp; internships
+        </div>
+      </div>
 
-    <section id="projects">
-      <h2>Projects</h2>
-      <ul>
-        <li>
-          <strong>Basic Chatting Application</strong> – An Android app featuring real-time chat functionality with login, signup, and a dynamic home screen built using RecyclerView and Firebase integration.
-        </li>
-        <li>
-          <strong>Food Delivery App (Admin + Client)</strong> – A full-stack Android application with two panels:
-          <ul>
-            <li><strong>Client Side</strong> – Users can browse menus, place orders, track deliveries, and make payments.</li>
-            <li><strong>Admin Side</strong> – Admins can manage restaurants, update menus, handle orders, and monitor real-time delivery status.</li>
-          </ul>
-        </li>
-        <li>
-          <strong>Student Management System (PHP)</strong> – A CRUD app to manage student data with authentication using PHP and MySQL.
-        </li>
-        <li>
-          <strong>OTP Login System</strong> – Secure user login system with OTP and forgot password features, built using PHP and MySQL.
-        </li>
-        <li>
-          <strong>Cloud Security Lab (AWS)</strong> – Practice environment using AWS Free Tier to explore IAM roles, access controls, S3 policies, and security groups.
-        </li>
-      </ul>
-    </section>
+      <div class="hero-cert-card">
+        <div class="cert-badge">☁️</div>
+        <div>
+          <div class="cert-name">AWS Certified Cloud Practitioner</div>
+          <div class="cert-meta">Certified — January 2026</div>
+        </div>
+      </div>
 
-    <section id="education">
-      <h2>Education</h2>
-      <p><strong>Bachelor of Computer Applications (BCA)</strong> – 2025</p>
-    </section>
+      <div class="hero-tech-card">
+        <div class="card-label">Tech Stack</div>
+        <div class="tech-pills">
+          <span class="tech-pill hot">AWS</span>
+          <span class="tech-pill hot">Docker</span>
+          <span class="tech-pill hot">Kubernetes</span>
+          <span class="tech-pill">Terraform</span>
+          <span class="tech-pill">Jenkins</span>
+          <span class="tech-pill">Linux</span>
+          <span class="tech-pill">Python</span>
+          <span class="tech-pill">Git</span>
+          <span class="tech-pill">Bash</span>
+        </div>
+      </div>
 
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>Email: rawaljatin03@gmail.com</p>
-      <p>GitHub: <a href="https://github.com/jatinnrawal" target="_blank">github.com/jatinnrawal</a></p>
-      <p>LinkedIn: <a href="https://www.linkedin.com/in/jatin-rawal-79b225360/" target="_blank">linkedin.com/in/jatinrawal</a></p>
-    </section>
+    </div>
+  </div>
 
-    <section id="contact-form">
-      <h2>Contact Me</h2>
-      <form action="https://formspree.io/f/xanjkzar" method="POST">
-        <label for="name">Name</label><br />
-        <input type="text" id="name" name="name" required /><br /><br />
+  <div class="hero-scroll">
+    <span>scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
 
-        <label for="email">Email</label><br />
-        <input type="email" id="email" name="_replyto" required /><br /><br />
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="section-inner">
+    <div class="section-eyebrow">// 01 — about</div>
+    <h2 class="section-title">Who I Am</h2>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I'm a DevOps Engineer focused on cloud infrastructure, automation, and system security. I work with AWS, Linux, Docker, Kubernetes, and Terraform to build reliable, scalable environments.</p>
+        <p>My work sits at the intersection of development and operations — setting up CI/CD pipelines with Jenkins, managing infrastructure as code, and making sure systems stay up, secure, and efficient.</p>
+        <p>I believe good DevOps is invisible. When pipelines run clean, deployments are silent, and infrastructure just works — that's the goal.</p>
+      </div>
+      <div class="about-stats reveal">
+        <div class="stat"><div class="stat-num">BCA</div><div class="stat-label">graduate 2025</div></div>
+        <div class="stat"><div class="stat-num">5+</div><div class="stat-label">projects built</div></div>
+        <div class="stat"><div class="stat-num">AWS</div><div class="stat-label">cloud focused</div></div>
+        <div class="stat"><div class="stat-num">∞</div><div class="stat-label">bugs debugged</div></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <label for="message">What can I help you with?</label><br />
-        <textarea id="message" name="message" rows="5" required></textarea><br /><br />
+<!-- SKILLS -->
+<section id="skills" class="section" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="section-inner">
+    <div class="section-eyebrow">// 02 — skills</div>
+    <h2 class="section-title">What I Work With</h2>
+    <div class="skills-grid">
 
-        <button type="submit" class="btn">Send Message</button>
-      </form>
-    </section>
+      <div class="skill-card reveal">
+        <div class="skill-icon">☁️</div>
+        <div class="skill-name">Cloud & AWS</div>
+        <div class="skill-desc">Hands-on with AWS Free Tier — access control, compute, storage, and security configurations.</div>
+        <div class="skill-tags"><span class="tag">IAM</span><span class="tag">EC2</span><span class="tag">S3</span><span class="tag">Security Groups</span></div>
+      </div>
 
-    <section class="download-resume">
-      <a href="Jatin_Resume.pdf" class="btn" download>Download Resume</a>
-    </section>
-  </main>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🐧</div>
+        <div class="skill-name">Linux & Networking</div>
+        <div class="skill-desc">Comfortable in the terminal — file systems, scripting, permissions, and basic network config.</div>
+        <div class="skill-tags"><span class="tag">Linux</span><span class="tag">Bash</span><span class="tag">Networking</span></div>
+      </div>
 
-  <footer>
-    <p>© 2025 Jatin. All rights reserved.</p>
-  </footer>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🐍</div>
+        <div class="skill-name">Python</div>
+        <div class="skill-desc">Writing automation scripts, tooling, and backend logic. Clean code, practical focus.</div>
+        <div class="skill-tags"><span class="tag">Python</span><span class="tag">Scripting</span><span class="tag">Automation</span></div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">⚙️</div>
+        <div class="skill-name">DevOps Tools</div>
+        <div class="skill-desc">Building with the core DevOps stack — containers, orchestration, CI/CD, and IaC.</div>
+        <div class="skill-tags"><span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">Jenkins</span><span class="tag">Terraform</span></div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">🔀</div>
+        <div class="skill-name">Git & Version Control</div>
+        <div class="skill-desc">Daily Git usage — branching, PRs, merge strategies, and GitHub workflows.</div>
+        <div class="skill-tags"><span class="tag">Git</span><span class="tag">GitHub</span></div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" class="section">
+  <div class="section-inner">
+    <div class="section-eyebrow">// 03 — education</div>
+    <h2 class="section-title">Education & Certs</h2>
+    <div class="edu-card reveal">
+      <div class="edu-icon">🎓</div>
+      <div>
+        <div class="edu-year">2022 — 2025</div>
+        <div class="edu-degree">Bachelor of Computer Applications (BCA)</div>
+        <div class="edu-desc">Studied core CS fundamentals, software engineering, databases, and networking. Built multiple real-world projects across Android, PHP, and cloud platforms throughout the degree.</div>
+      </div>
+    </div>
+
+    <div class="edu-card reveal" style="margin-top: 1rem;">
+      <div class="edu-icon" style="background: #ff9e6d18; border-color: #ff9e6d;">☁️</div>
+      <div>
+        <div class="edu-year">January 2026</div>
+        <div class="edu-degree">AWS Certified Cloud Practitioner</div>
+        <div class="edu-desc">Earned the AWS Cloud Practitioner certification — covering cloud concepts, core AWS services, security, architecture, pricing, and support. Foundation for deeper AWS specialization.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section" style="background:var(--surface);border-top:1px solid var(--border);">
+  <div class="section-inner">
+    <div class="section-eyebrow" style="text-align:center;">// 04 — contact</div>
+    <div class="contact-inner">
+      <h2 class="contact-big">Let's<br><span class="orange">Connect.</span></h2>
+      <p class="contact-sub">Open to DevOps roles, internships &amp; collabs.</p>
+
+      <div class="contact-links">
+        <a href="mailto:rawaljatin03@gmail.com" class="contact-chip">✉ rawaljatin03@gmail.com</a>
+        <a href="https://github.com/jatinnrawal" target="_blank" class="contact-chip">⌥ github.com/jatinnrawal</a>
+        <a href="https://www.linkedin.com/in/jatin-rawal-79b225360/" target="_blank" class="contact-chip">in linkedin</a>
+      </div>
+
+      <div class="contact-form">
+        <form action="https://formspree.io/f/xanjkzar" method="POST">
+          <div class="form-row">
+            <div class="field"><label>Name</label><input type="text" name="name" required placeholder="Your name" /></div>
+            <div class="field"><label>Email</label><input type="email" name="_replyto" required placeholder="your@email.com" /></div>
+          </div>
+          <div class="field field-full"><label>Message</label><textarea name="message" rows="5" required placeholder="What can I help you with?"></textarea></div>
+          <div class="form-submit"><button type="submit" class="btn-primary">Send Message →</button></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-copy">© 2025 Jatin Rawal. All rights reserved.</div>
+  <div class="footer-links">
+    <a href="https://github.com/jatinnrawal" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/jatin-rawal-79b225360/" target="_blank">LinkedIn</a>
+    <a href="mailto:rawaljatin03@gmail.com">Email</a>
+    <a href="Jatin_Resume.pdf" download>Resume</a>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      e.target.style.transitionDelay = (i * 0.08) + 's';
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
